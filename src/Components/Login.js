@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import Navbar from'./Navbar';
 
-// import Newac from './Newac';
 export default function Login() {
   const navigate = useNavigate();
   const login = () => {
@@ -17,7 +16,7 @@ export default function Login() {
   return (
     
     <>
-    <Navbar/>
+  
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
@@ -47,6 +46,7 @@ export default function Login() {
                   placeholder="Email address"
                 />
               </div>
+              
               <div>
                 <label htmlFor="password" className="sr-only">
                   Password
@@ -77,7 +77,7 @@ export default function Login() {
               </div>
 
               <div className="text-sm">
-                <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                <a href="/forgotpassword" className="font-medium text-indigo-600 hover:text-indigo-500">
                   Forgot your password?
                 </a>
               </div>

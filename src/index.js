@@ -1,19 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './Components/Home';
-// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Login from './Components/Login';
 import About from './Components/About';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider,} from "react-router-dom";
 import Afterlogin from './Components/Afterlogin';
 import Contact from './Components/Contact';
 import Newac from './Components/Newac';
 import Policy from './Components/Policy';
+import Forgotpassword from './Components/Forgotpassword';
+
 
 
 const router = createBrowserRouter([
@@ -48,6 +46,10 @@ const router = createBrowserRouter([
   {
     path:"/newac",
     element:<Newac/>
+  },
+  {
+    path:'/forgotpassword',
+    element:<Forgotpassword/>
   }
 
   

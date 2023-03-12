@@ -1,21 +1,34 @@
-/*
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/forms'),
-    ],
-  }
-  ```
-*/
+
 import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
 import Navbar from'./Navbar';
-
+import { useRef } from "react";
+import { useState } from 'react'
 export default function home() {
+  // const Subscribe=()=>{
+  //   window.alert("Thank you for subscribing ");
+  // }
+  const inputElement = useRef();
+    
+  const [showModal, setShowModal]=useState(false)
+  const [email, setemail]=useState("")
+  const[error,seterror]=useState("")
+  const Subscribe = () => {
+      const email = inputElement.current.value;
+     
+      
+      const emailpattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+      if(emailpattern.test(email)){
+          seterror("")
+          setemail(email)
+          setShowModal(true)
+      }
+      else{
+          seterror("Please enter a valid email address")
+          
+      }
+
+
+  }
   return (
     <>
     <Navbar/>
@@ -32,7 +45,7 @@ export default function home() {
                 Email address
               </label>
               <input
-                id="email-address"
+                ref={inputElement}
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -40,13 +53,18 @@ export default function home() {
                 className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
                 placeholder="Enter your email"
               />
+              
               <button
                 type="submit"
+                onClick={Subscribe}
                 className="flex-none rounded-md bg-indigo-500 py-2.5 px-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
               >
                 Subscribe
               </button>
             </div>
+                 <div className='herror'>
+                    <h1>{(error)}</h1>
+                 </div>
           </div>
           <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
             <div className="flex flex-col items-start">
@@ -123,6 +141,41 @@ export default function home() {
         </figure>
       </div>
     </section>
+    {showModal ? (
+        <>
+          <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                {/*header*/}
+               
+                 
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+                      ×
+                    </span>
+                  </button>
+                
+                {/*body*/}
+                <div className="relative p-6 flex-auto">
+                  <p className="my-4 text-red-500 text-lg leading-relaxed">
+                   Thank you for subscribing <br></br>
+                  {(email)}
+                  </p>
+                </div>
+                {/*footer*/}
+                <button className="group relative flex w-full justify-center rounded-md border  bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-fuchsia-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2" type="submit" onClick={()=>setShowModal(false)}> close</button>
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
     </>
-  )
+  );
 }
