@@ -1,17 +1,72 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { useRef } from "react";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import app from "../firebase";
 
 export default function Newac() {
+  const auth = getAuth(app);
   const navigate = useNavigate();
-  const savebtn =()=>{
-    navigate('/');
-  }
-  const Cancel =()=>{
-    navigate('/Login');
-  }
+
+  const inputFirstName = useRef(null);
+  const inputLastName = useRef(null);
+  const inputEmail = useRef(null);
+  const inputCountry = useRef(null);
+  const inputAddress = useRef(null);
+  const inputCity = useRef(null);
+  const inputRegion = useRef(null);
+  const inputPostalCode = useRef(null);
+  const inputPassword = useRef(null);
+
+  const register = (e) => {
+    e.preventDefault();
+    console.log();
+    const email = inputEmail.current.value;
+    const password = window.atob(inputPassword.current.value);
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(user);
+        postData();
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        // const errorMessage = error.message;
+        alert(errorCode);
+      });
+  };
+  const postData = async () => {
+    await fetch(
+      "https://pmusiclogin-default-rtdb.firebaseio.com/PMusicUserData.json",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          firstName: inputFirstName.current.value,
+          lastName: inputLastName.current.value,
+          email: inputEmail.current.value,
+          country: inputCountry.current.value,
+          address: inputAddress.current.value,
+          city: inputCity.current.value,
+          region: inputRegion.current.value,
+          postalCode: inputPostalCode.current.value,
+        }),
+      }
+    );
+    alert("Registration Successful");
+    cancel();
+  };
+  // const savebtn = () => {
+  //   navigate("/");
+  // };
+  const cancel = () => {
+    navigate("/Login");
+  };
   return (
     <>
-    
-    <div className="hidden sm:block" aria-hidden="true">
+      <div className="hidden sm:block" aria-hidden="true">
         <div className="py-5">
           <div className="border-t border-gray-200" />
         </div>
@@ -25,10 +80,14 @@ export default function Newac() {
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="first-name" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="first-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         First name
                       </label>
                       <input
+                        ref={inputFirstName}
                         type="text"
                         name="first-name"
                         id="first-name"
@@ -38,10 +97,14 @@ export default function Newac() {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="last-name" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="last-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         Last name
                       </label>
                       <input
+                        ref={inputLastName}
                         type="text"
                         name="last-name"
                         id="last-name"
@@ -50,11 +113,15 @@ export default function Newac() {
                       />
                     </div>
 
-                    <div >
-                      <label htmlFor="email-address" className="block text-sm font-medium leading-6 text-gray-900 ">
+                    <div>
+                      <label
+                        htmlFor="email-address"
+                        className="block text-sm font-medium leading-6 text-gray-900 "
+                      >
                         Email address
                       </label>
                       <input
+                        ref={inputEmail}
                         type="text"
                         name="email-address"
                         id="email-address"
@@ -64,10 +131,14 @@ export default function Newac() {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3">
-                      <label htmlFor="country" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="country"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         Country
                       </label>
                       <select
+                        ref={inputCountry}
                         id="country"
                         name="country"
                         autoComplete="country-name"
@@ -80,10 +151,14 @@ export default function Newac() {
                     </div>
 
                     <div className="col-span-6">
-                      <label htmlFor="street-address" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="street-address"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         Street address
                       </label>
                       <input
+                        ref={inputAddress}
                         type="text"
                         name="street-address"
                         id="street-address"
@@ -93,10 +168,14 @@ export default function Newac() {
                     </div>
 
                     <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                      <label htmlFor="city" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="city"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         City
                       </label>
                       <input
+                        ref={inputCity}
                         type="text"
                         name="city"
                         id="city"
@@ -106,10 +185,14 @@ export default function Newac() {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="region" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="region"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         State / Province
                       </label>
                       <input
+                        ref={inputRegion}
                         type="text"
                         name="region"
                         id="region"
@@ -119,10 +202,14 @@ export default function Newac() {
                     </div>
 
                     <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                      <label htmlFor="postal-code" className="block text-sm font-medium leading-6 text-gray-900">
+                      <label
+                        htmlFor="postal-code"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
                         ZIP / Postal code
                       </label>
                       <input
+                        ref={inputPostalCode}
                         type="text"
                         name="postal-code"
                         id="postal-code"
@@ -132,17 +219,26 @@ export default function Newac() {
                     </div>
                   </div>
                 </div>
+                <div className="napassword">
+                  <input
+                    ref={inputPassword}
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="password"
+                  />
+                </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                   <button
                     type="submit"
-                    onClick={savebtn}
+                    onClick={(e) => register(e)}
                     className="inline-flex justify-center rounded-md bg-indigo-600 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
                   >
                     Save
                   </button>
                 </div>
                 <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
-                  <button type="submit" className=" nbtn" onClick={Cancel} >
+                  <button type="submit" className=" nbtn" onClick={cancel}>
                     Cancel
                   </button>
                 </div>
@@ -151,9 +247,6 @@ export default function Newac() {
           </div>
         </div>
       </div>
-      </>
+    </>
   );
 }
-
-
-
