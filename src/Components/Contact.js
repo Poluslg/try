@@ -6,7 +6,7 @@ function Contact() {
     name: '',
     email: '',
     number: '',
-    message: '',
+    message: ''
   });
 
   const getUserData = (event) => {
