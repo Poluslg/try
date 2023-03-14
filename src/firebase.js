@@ -5,12 +5,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDJrsLIKVb522O6T_1tbnXJoCu7XzcVyiY",
-  authDomain: "pmusiclogin.firebaseapp.com",
-  projectId: "pmusiclogin",
-  storageBucket: "pmusiclogin.appspot.com",
-  messagingSenderId: "912119814642",
-  appId: "1:912119814642:web:cddaf867576044c5e0336b"
+  apiKey: "AIzaSyAvkfJ3dqzvBLCxyhR28BnSg4WB0shRZ0E",
+  authDomain: "pmusiclogin-b55ef.firebaseapp.com",
+  projectId: "pmusiclogin-b55ef",
+  storageBucket: "pmusiclogin-b55ef.appspot.com",
+  messagingSenderId: "475738216650",
+  appId: "1:475738216650:web:a2117487f278ab3600bc33"
 };
 
 // Initialize Firebase
