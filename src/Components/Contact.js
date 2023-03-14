@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import Navbar from './Navbar';
+import React, { useState } from "react";
+import Navbar from "./Navbar";
 
 function Contact() {
   const [user, setUser] = useState({
-    name: '',
-    email: '',
-    number: '',
-    message: ''
+    name: "",
+    email: "",
+    number: "",
+    message: "",
   });
 
   const getUserData = (event) => {
@@ -18,40 +18,36 @@ function Contact() {
 
   const postData = async (event) => {
     event.preventDefault();
-    const{ name, email, number, message}=user;
-    if(name&& email&& number&& message){
-
-    
-    
-   const res = await fetch(
-    "https://pmusiccontact-cfcb3-default-rtdb.firebaseio.com/PMusiccontact.json",
-    {method: "POST",
-    headers:{
-      "Content-Type":"application/json",
-    },
-    body: JSON.stringify(
-      {
-        name,
-        email,
-        number,
-        message,
+    const { name, email, number, message } = user;
+    if (name && email && number && message) {
+      const res = await fetch(
+        "https://pmusiccontact-cfcb3-default-rtdb.firebaseio.com/PMusiccontact.json",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            number,
+            message,
+          }),
+        }
+      );
+      if (res) {
+        setUser({
+          name: "",
+          email: "",
+          number: "",
+          message: "",
+        });
+        alert("Thank You For Contact with Us");
       }
-    )
+    } else {
+      alert("Please fill all the Information");
     }
-    )
-    if (res)
-    {setUser({
-      name: '',
-      email: '',
-      number: '',
-      message: '',
-    });
-    alert("Thank You For Contact with Us")
-  }
-  } else{
-      alert("Please fill all the Information")
-  }
-};
+  };
 
   return (
     <>

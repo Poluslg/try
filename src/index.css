@@ -262,3 +262,30 @@ margin-left: 2.25rem;
 }
 
 /* ..................... END of Homepage css.................... */
+
+/* Mobile */
+@media screen and (max-width: 639px) {
+  .nemailinput, .npasswordinput {
+    width: 90vw;
+  }
+}
+
+/* Desktop */
+.npasswordlabel {
+  margin-bottom: 1rem; /* 16px */
+}
+
+.nemailinput {
+  
+  display: flex;
+  position: static;
+  height: 2rem;
+  font-size: 1rem;
+  width: 96vw;
+  line-height: 1.5;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 0.125rem 0.25rem rgba(var(--bs-body-color-rgb),.075)!important;
+}
+
+
+

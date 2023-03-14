@@ -1,38 +1,38 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAuth, signInWithCredential } from "firebase/auth";
-import app from "../firebase";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
-  const auth = getAuth(app);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const login = () => {
-    signInWithCredential(auth, email, password)
+  const [email, getEmail] = useState("");
+  const [password, getPassword] = useState("");
+  const auth = getAuth();
+ 
+
+  const login = (event) => {
+    event.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
+        // Signed in 
         const user = userCredential.user;
-        console.log(user);
-        alert("Login Sucessfull");
+        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
-        // const errorMessage = error.message;
-        alert(errorCode);
+        const errorMessage = error.message;
       });
   };
 
   const navigate = useNavigate();
-
-  const Cancel = () => {
+  const cancel = () => {
     navigate("/");
   };
-  const Newac = () => {
+  const newac = () => {
     navigate("/Newac");
   };
+
   return (
     <>
-      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
@@ -45,8 +45,7 @@ export default function Login() {
             </h2>
           </div>
 
-          <input type="hidden" name="remember" defaultValue="true" />
-          <div className="-space-y-px rounded-md shadow-sm">
+          <form className="-space-y-px rounded-md shadow-sm" onSubmit={login}>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -59,7 +58,8 @@ export default function Login() {
                 required
                 className="relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Email address"
-                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                onChange={(e) => getEmail(e.target.value)}
               />
             </div>
 
@@ -75,10 +75,11 @@ export default function Login() {
                 required
                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+                onChange={(e) => getPassword(e.target.value)}
               />
             </div>
-          </div>
+         </form>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -113,20 +114,20 @@ export default function Login() {
               className="group relative flex w-full justify-center rounded-md border  bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
               <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                {/* <LockClosedIcon className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true" /> */}
+                
               </span>
               Sign in
             </button>
             <div className="btnac">
-              <button type="submit" onClick={Newac} className="newac">
+              <button type="submit" onClick={newac} className="newac">
                 Create a new Account
               </button>
-              <button type="submit" onClick={Cancel} className="cancel">
+              <button type="submit" onClick={cancel}  className="cancel">
                 Cancel
               </button>
             </div>
           </div>
-          {/* </form> */}
+        
         </div>
       </div>
     </>
