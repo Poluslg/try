@@ -9,6 +9,7 @@ const navigation = [
   { name: 'About', href: '/about', current: false },
   { name: 'Contact', href: '/contact', current: false },
   {name:'Login',href:'/login',current:false}
+ 
 ]
 
 function classNames(...classes) {
@@ -23,7 +24,7 @@ export default function Example() {
   }
   
   return (
-    <Disclosure as="nav" className={darkMode ? "bg-gray-900 text-white" : "bg-gray-800"}>
+    <Disclosure as="nav" className={darkMode ? "bg-gray-500 text-white" : "bg-indigo-500"}>
       {({ open }) => (
         <>
           <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -56,6 +57,7 @@ export default function Example() {
                 </div>
                 <div className="hidden sm:ml-4 sm:block">
                   <div className="space-y-1 px-2 pt-2 pb-3">
+                  
                     {navigation.map((item) => (
                       <a
                         key={item.name}
@@ -72,12 +74,12 @@ export default function Example() {
                   </div>
                 </div>
               </div>
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={darkMode} onChange={toggleDarkMode} />
-                <label class="form-check-label" for="flexSwitchCheckDefault">{darkMode ? "Dark Mode" : "Light Mode"}</label>
+              {/* <div className="dark-mode-toggle12">
+                <div className="form-check form-switch">
+                <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" checked={darkMode} onChange={toggleDarkMode} />
+                <label className="form-check-label" htmlFor="flexSwitchCheckDefault">{darkMode ? "Dark Mode" : "Light Mode"}</label>
               </div>
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-              </div>
+            </div> */}
             </div>
           </div>
 

@@ -1,65 +1,26 @@
-import { ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
-import Navbar from './Navbar';
-const features = [
-  {
-    name: 'Push to deploy',
-    description:
-      'Morbi viverra dui mi arcu sed. Tellus semper adipiscing suspendisse semper morbi. Odio urna massa nunc massa.',
-    icon: CloudArrowUpIcon,
-  },
-  {
-    name: 'SSL certificates',
-    description:
-      'Sit quis amet rutrum tellus ullamcorper ultricies libero dolor eget. Sem sodales gravida quam turpis enim lacus amet.',
-    icon: LockClosedIcon,
-  },
-  {
-    name: 'Simple queues',
-    description:
-      'Quisque est vel vulputate cursus. Risus proin diam nunc commodo. Lobortis auctor congue commodo diam neque.',
-    icon: ArrowPathIcon,
-  },
-  {
-    name: 'Advanced security',
-    description:
-      'Arcu egestas dolor vel iaculis in ipsum mauris. Tincidunt mattis aliquet hac quis. Id hac maecenas ac donec pharetra eget.',
-    icon: FingerPrintIcon,
-  },
-]
-
-export default function Example() {
+import React from 'react'
+import Navbar from'./Navbar';
+function About() {
   return (
-    <>
-    <Navbar/>
-    <div className="bg-white py-24 sm:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-600">Deploy faster</h2>
-          <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-            Everything you need to deploy your app
-          </p>
-          <p className="mt-6 text-lg leading-8 text-gray-600">
-            Quis tellus eget adipiscing convallis sit sit eget aliquet quis. Suspendisse eget egestas a elementum
-            pulvinar et feugiat blandit at. In mi viverra elit nunc.
-          </p>
-        </div>
-        <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-          <dl className="grid max-w-xl grid-cols-1 gap-y-10 gap-x-8 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-            {features.map((feature) => (
-              <div key={feature.name} className="relative pl-16">
-                <dt className="text-base font-semibold leading-7 text-gray-900">
-                  <div className="absolute top-0 left-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-                    <feature.icon className="h-6 w-6 text-white" aria-hidden="true" />
-                  </div>
-                  {feature.name}
-                </dt>
-                <dd className="mt-2 text-base leading-7 text-gray-600">{feature.description}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-      </div>
+   <>
+    <Navbar/> 
+    <div class="bg-white">
+      <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="sm:flex sm:flex-col sm:align-center">
+          <h2 class="text-3xl font-extrabold text-gray-900 sm:text-center">Welcome to PMusic, your ultimate source of music entertainment!</h2>
+             <p class="mt-5 text-xl text-gray-500 sm:text-center">We are a team of passionate music enthusiasts who believe that music is a powerful form of expression that can inspire and unite people from all walks of life. Our mission is to provide you with a comprehensive platform that offers a diverse range of music genres and artists from around the world.</p>
+       </div>
+    <div class="mt-10">
+       <h3 class="mt-3 text-lg text-gray-500">At PMusic, we strive to bring you the latest and greatest in the music industry. Our team works tirelessly to curate playlists that cater to different moods and occasions, whether you're looking for a soothing melody to unwind after a long day, or an upbeat track to get you pumped for a workout session. We also feature exclusive interviews with your favorite artists, behind-the-scenes footage of concerts and events, and breaking news updates on the latest happenings in the music world.</h3>
+        <p class="mt-3 text-lg text-gray-500">We take pride in providing a seamless user experience, making it easy for you to discover new music, create and share playlists, and connect with other music lovers. Our platform is accessible across all devices, so you can enjoy your favorite tunes anytime, anywhere.
+           But we're more than just a music streaming service. We believe that music has the power to make a positive impact on society, which is why we've partnered with various charities and non-profit organizations to support their causes through music.
+          Thank you for choosing PMusic as your go-to source for all things music. We hope to inspire you, entertain you, and connect you with the world through the universal language of music.</p>
     </div>
-    </>
+  </div>
+</div>
+
+   </>
   )
 }
+
+export default About

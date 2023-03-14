@@ -228,6 +228,36 @@ margin-left: 2.25rem;
 } */
 
 /* ..................End Forgotpage css...................... */
+
+/* ..................... Start of Homepage css.................... */
+
 .herror{
   color: white;
 }
+
+.dark-mode-toggle12 {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2rem; /* adjust this value to position the div horizontally */
+}
+@media (max-width: 639px) {
+  .dark-mode-toggle12 {
+    position: relative;
+    margin-top: 1rem; /* adjust this value to position the div vertically */
+    right: 0;
+  }
+}
+.hemail{
+  width: 400px;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  align-items: center;
+}
+.hemail[type="email"]{
+  padding-left: 10px;
+  background-color: transparent;
+}
+
+/* ..................... END of Homepage css.................... */

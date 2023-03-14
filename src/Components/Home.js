@@ -4,9 +4,7 @@ import Navbar from'./Navbar';
 import { useRef } from "react";
 import { useState } from 'react'
 export default function home() {
-  // const Subscribe=()=>{
-  //   window.alert("Thank you for subscribing ");
-  // }
+
   const inputElement = useRef();
     
   const [showModal, setShowModal]=useState(false)
@@ -20,7 +18,7 @@ export default function home() {
       if(emailpattern.test(email)){
           seterror("")
           setemail(email)
-          setShowModal(true)
+          window.alert("Thank you for subscribing ! ");
       }
       else{
           seterror("Please enter a valid email address")
@@ -41,7 +39,7 @@ export default function home() {
               If you're interested in becoming a beta tester for PMusic, please enter your email in the input box below. We'll keep you informed about the latest updates and when the beta program is available. As a beta tester, you'll get early access to new features and be able to provide feedback to help shape the future of PMusic. Thank you for your interest!
             </p>
             <div className="mt-6 flex max-w-md gap-x-4">
-              <label htmlFor="email-address" className="sr-only">
+              <label htmlhtmlFor="email-address" className="sr-only">
                 Email address
               </label>
               <input
@@ -50,7 +48,7 @@ export default function home() {
                 type="email"
                 autoComplete="email"
                 required
-                className="min-w-0 flex-auto rounded-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                className="hemail"
                 placeholder="Enter your email"
               />
               
@@ -176,6 +174,52 @@ export default function home() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
+     <div class="bg-white py-20 " >
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
+          Trusted by the world’s most innovative teams
+        </h2>
+        <div className="mx-auto mt-10 grid max-w-lg grid-cols-4 items-center gap-x-8 gap-y-10 sm:max-w-xl sm:grid-cols-6 sm:gap-x-10 lg:mx-0 lg:max-w-none lg:grid-cols-5">
+          <img
+            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+            src="https://tailwindui.com/img/logos/158x48/transistor-logo-gray-900.svg"
+            alt="Transistor"
+            width={158}
+            height={48}
+          />
+          <img
+            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+            src="https://tailwindui.com/img/logos/158x48/reform-logo-gray-900.svg"
+            alt="Reform"
+            width={158}
+            height={48}
+          />
+          <img
+            className="col-span-2 max-h-12 w-full object-contain lg:col-span-1"
+            src="https://tailwindui.com/img/logos/158x48/tuple-logo-gray-900.svg"
+            alt="Tuple"
+            width={158}
+            height={48}
+          />
+          <img
+            className="col-span-2 max-h-12 w-full object-contain sm:col-start-2 lg:col-span-1"
+            src="https://tailwindui.com/img/logos/158x48/savvycal-logo-gray-900.svg"
+            alt="SavvyCal"
+            width={158}
+            height={48}
+          />
+          <img
+            className="col-span-2 col-start-2 max-h-12 w-full object-contain sm:col-start-auto lg:col-span-1"
+            src="https://tailwindui.com/img/logos/158x48/statamic-logo-gray-900.svg"
+            alt="Statamic"
+            width={158}
+            height={48}
+            />
+        </div>
+      </div>
+    </div>
+  
+
     </>
   );
 }

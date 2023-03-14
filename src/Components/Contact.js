@@ -17,10 +17,10 @@ function Contact() {
         <input type="email" name="email" id="email" placeholder='Enter your email id' />
         <input type="text" name="number" id="number" placeholder='Enter Your Phone Number' />
       </div>
-      <div class="cmsg">
-        <label for="message" class="block ">Message</label>
-        <div class="cmsg2">
-          <textarea name="message" id="message" rows="4" class="ctexta"></textarea>
+      <div className="cmsg">
+        <label htmlFor="message" className="block ">Message</label>
+        <div className="cmsg2">
+          <textarea name="message" id="message" rows="4" className="ctexta"></textarea>
         </div>
       </div>
     </from>
