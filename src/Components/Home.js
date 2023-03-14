@@ -4,11 +4,12 @@ import Navbar from './Navbar';
 import { useRef, useState } from 'react';
 
 export default function Home() {
+  const[error,seterror]=useState("")
   const [user, setUser] = useState({
     email: '',
   });
 
-  const inputElement = useRef(null); // added missing ref
+  const inputElement = useRef(null);
 
   const getUserData = (event) => {
     const name = event.target.name;
@@ -19,28 +20,35 @@ export default function Home() {
   const postData = async (event) => {
     event.preventDefault();
     const { email } = user;
-    if (email) {
-      const res = await fetch('https://pmusicbeta-default-rtdb.firebaseio.com/BetaEmail.json', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-        }),
-      });
-
-      // check the validity of the email entered
-      const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
-      if (emailPattern.test(email)) {
-        alert('Thank you for subscribing!');
-        setUser({ email: '' }); // clear the input field after successful submission
+    const emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+    if (emailPattern.test(email)) {
+      try {
+        const res = await fetch('https://pmusicbeta-default-rtdb.firebaseio.com/BetaEmail.json', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+          }),
+        });
+        if (res.ok) {
+          alert('Thank you for subscribing!');
+          setUser({ email: '' });
+        } else {
+          throw new Error('Network response was not ok');
+        }
       }
-       else {
-        alert('Please enter a valid email address');
+       catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while trying to subscribe. Please try again later.');
       }
+    } else {
+      seterror("Please enter a valid email address")
+      setUser({ email: '' });
     }
   };
+  
     return (
       <>
       <Navbar/>
@@ -76,8 +84,11 @@ export default function Home() {
                   Subscribe
                 </button>
               </div>
+              <div className='herror'>
+                    <h1>{(error)}</h1>
+                 </div>
                  
-            </div>
+            </div>  
             <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
               <div className="flex flex-col items-start">
                 <div className="rounded-md bg-white/5 p-2 ring-1 ring-white/10">
@@ -153,8 +164,9 @@ export default function Home() {
           </figure>
         </div>
       </section>
-      
+    
       <div className="bg-white py-20 " >
+      <hr />
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
             Trusted by the world’s most innovative teams
