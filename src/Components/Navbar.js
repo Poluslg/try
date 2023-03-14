@@ -17,11 +17,9 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, ] = useState(false);
 
-  function toggleDarkMode() {
-    setDarkMode(!darkMode);
-  }
+ 
   
   return (
     <Disclosure as="nav" className={darkMode ? "bg-gray-500 text-white" : "bg-indigo-500"}>

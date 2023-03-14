@@ -257,6 +257,7 @@ margin-left: 2.25rem;
 }
 .hemail[type="email"]{
   padding-left: 10px;
+  color: white;
   background-color: transparent;
 }
 

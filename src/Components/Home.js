@@ -3,7 +3,7 @@ import { CalendarDaysIcon, HandRaisedIcon } from '@heroicons/react/24/outline'
 import Navbar from'./Navbar';
 import { useRef } from "react";
 import { useState } from 'react'
-export default function home() {
+export default function Home() {
 
   const inputElement = useRef();
     
@@ -39,7 +39,7 @@ export default function home() {
               If you're interested in becoming a beta tester for PMusic, please enter your email in the input box below. We'll keep you informed about the latest updates and when the beta program is available. As a beta tester, you'll get early access to new features and be able to provide feedback to help shape the future of PMusic. Thank you for your interest!
             </p>
             <div className="mt-6 flex max-w-md gap-x-4">
-              <label htmlhtmlFor="email-address" className="sr-only">
+              <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
               <input
@@ -174,7 +174,7 @@ export default function home() {
           <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
         </>
       ) : null}
-     <div class="bg-white py-20 " >
+     <div className="bg-white py-20 " >
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2 className="text-center text-lg font-semibold leading-8 text-gray-900">
           Trusted by the world’s most innovative teams
