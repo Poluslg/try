@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
@@ -6,14 +6,16 @@ export default function Login() {
   const [email, getEmail] = useState("");
   const [password, getPassword] = useState("");
   const auth = getAuth();
- 
 
   const login = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
+        // Signed in
         const user = userCredential.user;
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("uid", user.uid);
+        navigate("/afterlogin");
         // ...
       })
       .catch((error) => {
@@ -21,6 +23,12 @@ export default function Login() {
         const errorMessage = error.message;
       });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/afterlogin");
+    }
+  }, []);
 
   const navigate = useNavigate();
   const cancel = () => {
@@ -32,7 +40,7 @@ export default function Login() {
 
   return (
     <>
-       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+      <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md space-y-8">
           <div>
             <img
@@ -79,7 +87,7 @@ export default function Login() {
                 onChange={(e) => getPassword(e.target.value)}
               />
             </div>
-         </form>
+          </form>
 
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -113,21 +121,18 @@ export default function Login() {
               onClick={login}
               className="group relative flex w-full justify-center rounded-md border  bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-                
-              </span>
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3"></span>
               Sign in
             </button>
             <div className="btnac">
               <button type="submit" onClick={newac} className="newac">
                 Create a new Account
               </button>
-              <button type="submit" onClick={cancel}  className="cancel">
+              <button type="submit" onClick={cancel} className="cancel">
                 Cancel
               </button>
             </div>
           </div>
-        
         </div>
       </div>
     </>

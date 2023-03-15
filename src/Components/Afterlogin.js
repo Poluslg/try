@@ -1,5 +1,6 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 const user = {
@@ -15,17 +16,24 @@ const navigation = [
   { name: "Calendar", href: "#", current: false },
   { name: "Reports", href: "#", current: false },
 ];
-const userNavigation = [
-  { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/login" },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Example() {
+export default function Afterlogin() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+  }, []);
+
+  function logOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("uid");
+    navigate("/login");
+  }
   return (
     <>
       <div className="min-h-full">
@@ -94,21 +102,31 @@ export default function Example() {
                           leaveTo="transform opacity-0 scale-95"
                         >
                           <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            {userNavigation.map((item) => (
-                              <Menu.Item key={item.name}>
-                                {({ active }) => (
-                                  <a
-                                    href={item.href}
-                                    className={classNames(
-                                      active ? "bg-gray-100" : "",
-                                      "block px-4 py-2 text-sm text-gray-700"
-                                    )}
-                                  >
-                                    {item.name}
-                                  </a>
-                                )}
-                              </Menu.Item>
-                            ))}
+                            <Menu.Item>
+                              <a
+                                href="#"
+                                className="block px-4 py-2 text-sm text-gray-700"
+                              >
+                                Your Profile
+                              </a>
+                            </Menu.Item>
+                            <Menu.Item>
+                              <a
+                                href="#"
+                                className="block px-4 py-2 text-sm text-gray-700"
+                              >
+                                Settings
+                              </a>
+                            </Menu.Item>
+                            <Menu.Item>
+                              <a
+                                href="#"
+                                className="block px-4 py-2 text-sm text-gray-700"
+                                onClick={logOut}
+                              >
+                                Logout
+                              </a>
+                            </Menu.Item>
                           </Menu.Items>
                         </Transition>
                       </Menu>
@@ -179,7 +197,7 @@ export default function Example() {
                     </button>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
+                    {/* {userNavigation.map((item) => (
                       <Disclosure.Button
                         key={item.name}
                         as="a"
@@ -188,7 +206,7 @@ export default function Example() {
                       >
                         {item.name}
                       </Disclosure.Button>
-                    ))}
+                    ))} */}
                   </div>
                 </div>
               </Disclosure.Panel>

@@ -29,6 +29,7 @@ export default function Newac() {
       });
   };
   const postData = async () => {
+    debugger
     await fetch(
       "https://pmusiclogin-b55ef-default-rtdb.firebaseio.com/PMusicUserData.json",
       {
