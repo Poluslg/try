@@ -354,7 +354,9 @@ margin-left: 2.25rem;
   background-color: white;
   border-radius: 3px;
 }
-
+.lerror{
+  color: rgb(14, 13, 13);
+}
 
 
 /* .....................................END css of login.....................................................  */
