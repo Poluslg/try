@@ -8,6 +8,7 @@ export default function Login() {
   const [password, getPassword] = useState("");
   const auth = getAuth();
   const navigate = useNavigate();
+  const[error,seterror]=useState("")
 
   const login = (event) => {
     event.preventDefault();
@@ -20,10 +21,21 @@ export default function Login() {
         navigate("/afterlogin");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        alert(errorCode);
+        if (error.code === 'auth/user-not-found') {
+          seterror("Invalid email address and/or password")
+        } else if (error.code === 'auth/invalid-email') {
+          seterror("Enter Email Address")
+        } else if(error.code==='auth/wrong-password'){
+          seterror("Wrong Password")
+        }else if(error.code==='auth/internal-error'){
+          seterror("Enter Password")
+        }
+        else {
+          seterror(error.code)
+        }
       });
-  };
+      
+    }
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -98,7 +110,9 @@ export default function Login() {
               />
             </div>
           </form>
-
+          <div className='lerror'>
+                    <h1>{(error)}</h1>
+                 </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input
