@@ -11,6 +11,7 @@ import Contact from './Components/Contact';
 import Newac from './Components/Newac';
 import Policy from './Components/Policy';
 import Forgotpassword from './Components/Forgotpassword';
+import Errorpage from './Components/Errorpage';
 
 
 
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "*",
-    element: <div>Page not found</div>,
+    element: <Errorpage/>,
   },
   {
     path:"/contact",

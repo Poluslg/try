@@ -9,6 +9,7 @@ export default function Newac() {
   const inputFirstName = useRef(null);
   const inputLastName = useRef(null);
   const inputEmail = useRef(null);
+  const inputNumber = useRef(null);
   const inputPassword = useRef(null);
 
   const register = (e) => {
@@ -41,6 +42,7 @@ export default function Newac() {
           firstName: inputFirstName.current.value,
           lastName: inputLastName.current.value,
           email: inputEmail.current.value,
+          phonenumber : inputNumber.current.value
         }),
       }
     );
@@ -116,11 +118,28 @@ export default function Newac() {
                         className=" nemailinput"
                       />
                     </div>
+                  
                   </div>
+                  <div>
+                      <label
+                        htmlFor="email-address"
+                        className="block text-sm font-medium leading-6 text-gray-900 pt-3 "
+                      >
+                        Phone Number
+                      </label>
+                      <input
+                        ref={inputNumber}
+                        type="text"
+                        name="phone-number"
+                        id="phone-number"
+                        autoComplete="number"
+                        className=" nemailinput"
+                      />
+                    </div>
                   <div className="npasswordlabel">
                     <label
                       htmlFor="password"
-                      className="block text-sm py-3 font-medium leading-6 text-gray-900"
+                      className="block text-sm py-1 font-medium leading-6 text-gray-900"
                     >
                       Password
                     </label>

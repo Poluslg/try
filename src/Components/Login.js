@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const [email, getEmail] = useState("");
   const [password, getPassword] = useState("");
   const auth = getAuth();
+  const navigate = useNavigate();
 
   const login = (event) => {
     event.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in
         const user = userCredential.user;
         localStorage.setItem("token", user.accessToken);
         localStorage.setItem("uid", user.uid);
+        alert("wellcome to PMusic");
         navigate("/afterlogin");
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
-        const errorMessage = error.message;
+        alert(errorCode);
       });
   };
 
@@ -28,15 +29,24 @@ export default function Login() {
     if (localStorage.getItem("token")) {
       navigate("/afterlogin");
     }
-  }, []);
+  }, [navigate]);
 
-  const navigate = useNavigate();
   const cancel = () => {
     navigate("/");
   };
+
   const newac = () => {
     navigate("/Newac");
   };
+
+  const clientId =
+    "43835909057-60es2c54b6rqbvm6s0hlffuas4q3m526.apps.googleusercontent.com";
+
+  const gsing = () =>
+    GoogleLogin({
+      onSuccess: (tokenResponse) => console.log(tokenResponse),
+      clientId,
+    });
 
   return (
     <>
@@ -115,6 +125,19 @@ export default function Login() {
             </div>
           </div>
 
+          <div className="container mx-auto px-4">
+            <h1 className="lgor"> </h1>
+            <div className="googlelogoborder">
+              <button type="submit" onClick={gsing}>
+                Connect with google
+              </button>
+              <img
+                src="/google.svg"
+                alt="Google-Login"
+                className="googlelogo"
+              />
+            </div>
+          </div>
           <div>
             <button
               type="submit"

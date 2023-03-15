@@ -2,3 +2,7 @@ npm i @headlessui/react
 
 
 npm install firebase
+
+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  -Client secret
+
+43835909057-60es2c54b6rqbvm6s0hlffuas4q3m526.apps.googleusercontent.com -Client ID
