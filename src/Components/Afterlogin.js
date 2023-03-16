@@ -1,20 +1,21 @@
 import { Fragment, useEffect } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { useNavigate , Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { getDatabase, ref, child, get } from "firebase/database";
 
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
   imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "./defaultprofile.png",
 };
 const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  // { name: "Dashboard", href: "#", current: true },
+  // { name: "Team", href: "#", current: false },
+  // { name: "Projects", href: "#", current: false },
+  // { name: "Calendar", href: "#", current: false },
+  // { name: "Reports", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -22,12 +23,39 @@ function classNames(...classes) {
 }
 
 export default function Afterlogin() {
+  const dbRef = ref(getDatabase());
   const navigate = useNavigate();
   useEffect(() => {
+    const getStoredData = async () => {
+      const uid = await localStorage.getItem("uid");
+      if (uid && uid.length) {
+        getUserData(uid);
+      }
+    };
+
+    const getUserData = (userId) => {
+      get(child(dbRef, `users/${userId}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            const val = snapshot.val();
+            user.name = val.firstName;
+            user.email = val.email;
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+
     if (!localStorage.getItem("token")) {
       navigate("/login");
+    } else {
+      getStoredData();
     }
-  },[navigate]);
+  }, [dbRef ,navigate]);
 
   function logOut() {
     localStorage.removeItem("token");
@@ -46,8 +74,8 @@ export default function Afterlogin() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company"
+                        src="./favicon.ico"
+                        alt="PMusic"
                       />
                     </div>
                     <div className="hidden md:block">
@@ -112,20 +140,20 @@ export default function Afterlogin() {
                             </Menu.Item>
                             <Menu.Item>
                               <Link
-                               to="/errorpage"
+                                to="/errorpage"
                                 className="block px-4 py-2 text-sm text-gray-700"
                               >
                                 Settings
                               </Link>
                             </Menu.Item>
                             <Menu.Item>
-                              <a
-                               
+                              <Link
+                                to="/login"
                                 className="block px-4 py-2 text-sm text-gray-700"
                                 onClick={logOut}
                               >
                                 Logout
-                              </a>
+                              </Link>
                             </Menu.Item>
                           </Menu.Items>
                         </Transition>
@@ -188,26 +216,10 @@ export default function Afterlogin() {
                         {user.email}
                       </div>
                     </div>
-                    <button
-                      type="button"
-                      className="ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    
+                  
                   </div>
-                  <div className="mt-3 space-y-1 px-2">
-                    {/* {userNavigation.map((item) => (
-                      <Disclosure.Button
-                        key={item.name}
-                        as="a"
-                        href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Disclosure.Button>
-                    ))} */}
-                  </div>
+                  
                 </div>
               </Disclosure.Panel>
             </>
@@ -223,7 +235,9 @@ export default function Afterlogin() {
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            {/* Your content */}
+            <div>
+              <h6>Wellcome to PMusic</h6>
+            </div>
           </div>
         </main>
       </div>

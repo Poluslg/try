@@ -24,11 +24,11 @@ export default function Login() {
         if (error.code === 'auth/user-not-found') {
           seterror("Invalid email address and/or password")
         } else if (error.code === 'auth/invalid-email') {
-          seterror("Enter Email Address")
+          seterror("Please Enter Email Address")
         } else if(error.code==='auth/wrong-password'){
           seterror("Wrong Password")
         }else if(error.code==='auth/internal-error'){
-          seterror("Enter Password")
+          seterror("Pleae Enter Password")
         }
         else {
           seterror(error.code)
@@ -52,7 +52,7 @@ export default function Login() {
   };
 
   const clientId =
-    "43835909057-60es2c54b6rqbvm6s0hlffuas4q3m526.apps.googleusercontent.com";
+    "475738216650-h7cqlhdkietls673qhsos83fimfaa49i.apps.googleusercontent.com";
 
   const gsing = () =>
     GoogleLogin({

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import app from "../firebase";
+import { getDatabase, ref, set } from "firebase/database";
+import { app } from "../firebase";
 
 export default function Newac() {
   const auth = getAuth(app);
@@ -22,33 +23,26 @@ export default function Newac() {
         // Signed in
         const user = userCredential.user;
         console.log(user);
-        postData();
+        writeUserData(user.uid);
+        // postData();
       })
       .catch((error) => {
         const errorCode = error.code;
         alert(errorCode);
       });
   };
-  const postData = async () => {
-    debugger
-    await fetch(
-      "https://pmusiclogin-b55ef-default-rtdb.firebaseio.com/PMusicUserData.json",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          firstName: inputFirstName.current.value,
-          lastName: inputLastName.current.value,
-          email: inputEmail.current.value,
-          phonenumber : inputNumber.current.value
-        }),
-      }
-    );
-    alert("Registration Successful");
+
+  function writeUserData(userId) {
+    const db = getDatabase();
+    set(ref(db, "users/" + userId), {
+      firstName: inputFirstName.current.value,
+      lastName: inputLastName.current.value,
+      email: inputEmail.current.value,
+      phonenumber: inputNumber.current.value,
+    });
+    alert("Reg");
     cancel();
-  };
+  }
 
   const cancel = () => {
     navigate("/Login");
@@ -118,24 +112,23 @@ export default function Newac() {
                         className=" nemailinput"
                       />
                     </div>
-                  
                   </div>
                   <div>
-                      <label
-                        htmlFor="email-address"
-                        className="block text-sm font-medium leading-6 text-gray-900 pt-3 "
-                      >
-                        Phone Number
-                      </label>
-                      <input
-                        ref={inputNumber}
-                        type="text"
-                        name="phone-number"
-                        id="phone-number"
-                        autoComplete="number"
-                        className=" nemailinput"
-                      />
-                    </div>
+                    <label
+                      htmlFor="email-address"
+                      className="block text-sm font-medium leading-6 text-gray-900 pt-3 "
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      ref={inputNumber}
+                      type="text"
+                      name="phone-number"
+                      id="phone-number"
+                      autoComplete="number"
+                      className=" nemailinput"
+                    />
+                  </div>
                   <div className="npasswordlabel">
                     <label
                       htmlFor="password"
