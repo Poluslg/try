@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { GoogleLogin } from "@react-oauth/google";
+import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export default function Login() {
   const [email, getEmail] = useState("");
   const [password, getPassword] = useState("");
   const auth = getAuth();
   const navigate = useNavigate();
-  const[error,seterror]=useState("")
+  const [error, seterror] = useState("");
 
   const login = (event) => {
     event.preventDefault();
@@ -21,21 +21,19 @@ export default function Login() {
         navigate("/afterlogin");
       })
       .catch((error) => {
-        if (error.code === 'auth/user-not-found') {
-          seterror("Invalid email address and/or password")
-        } else if (error.code === 'auth/invalid-email') {
-          seterror("Please Enter Email Address")
-        } else if(error.code==='auth/wrong-password'){
-          seterror("Wrong Password")
-        }else if(error.code==='auth/internal-error'){
-          seterror("Pleae Enter Password")
-        }
-        else {
-          seterror(error.code)
+        if (error.code === "auth/user-not-found") {
+          seterror("Invalid email address and/or password");
+        } else if (error.code === "auth/invalid-email") {
+          seterror("Please Enter Email Address");
+        } else if (error.code === "auth/wrong-password") {
+          seterror("Wrong Password");
+        } else if (error.code === "auth/internal-error") {
+          seterror("Pleae Enter Password");
+        } else {
+          seterror(error.code);
         }
       });
-      
-    }
+  };
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -51,14 +49,25 @@ export default function Login() {
     navigate("/Newac");
   };
 
-  const clientId =
-    "475738216650-h7cqlhdkietls673qhsos83fimfaa49i.apps.googleusercontent.com";
+  const provider = new GoogleAuthProvider({
+    clientId:
+      "475738216650-h7cqlhdkietls673qhsos83fimfaa49i.apps.googleusercontent.com",
+    prompt: "one",
+  });
 
-  const gsing = () =>
-    GoogleLogin({
-      onSuccess: (tokenResponse) => console.log(tokenResponse),
-      clientId,
-    });
+  const gsing = () => {
+    signInWithPopup(auth, provider)
+      .then((userCredential) => {
+        const user = GoogleAuthProvider.credentialFromResult(userCredential);
+        localStorage.setItem("token", user.accessToken);
+        localStorage.setItem("uid", user.uid);
+        alert("welcome to PMusic");
+        navigate("/afterlogin");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   return (
     <>
@@ -110,9 +119,9 @@ export default function Login() {
               />
             </div>
           </form>
-          <div className='lerror'>
-                    <h1>{(error)}</h1>
-                 </div>
+          <div className="lerror">
+            <h1>{error}</h1>
+          </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
               <input

@@ -40,7 +40,7 @@ export default function Newac() {
       email: inputEmail.current.value,
       phonenumber: inputNumber.current.value,
     });
-    alert("Reg");
+    alert("successfully registered");
     cancel();
   }
 
