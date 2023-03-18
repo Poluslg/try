@@ -38,7 +38,7 @@ export default function Afterlogin() {
           if (snapshot.exists()) {
             console.log(snapshot.val());
             const val = snapshot.val();
-            user.name = val.firstName;
+            user.name = val.usename;
             user.email = val.email;
           } else {
             console.log("No data available");

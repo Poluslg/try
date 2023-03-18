@@ -12,6 +12,7 @@ export default function Newac() {
   const inputEmail = useRef(null);
   const inputNumber = useRef(null);
   const inputPassword = useRef(null);
+  const inputUserName = useRef(null);
 
   const register = (e) => {
     e.preventDefault();
@@ -35,6 +36,7 @@ export default function Newac() {
   function writeUserData(userId) {
     const db = getDatabase();
     set(ref(db, "users/" + userId), {
+      usename:inputUserName.current.value,
       firstName: inputFirstName.current.value,
       lastName: inputLastName.current.value,
       email: inputEmail.current.value,
@@ -62,6 +64,22 @@ export default function Newac() {
               <div className="overflow-hidden shadow sm:rounded-md">
                 <div className="bg-white px-4 py-5 sm:p-6">
                   <div className="grid grid-cols-6 gap-6">
+                    <div className="col-span-6 sm:col-span-4">
+                      <label
+                        htmlFor="user-name"
+                        className="block text-sm font-medium leading-6 text-gray-900"
+                      >
+                        User Name
+                      </label>
+                      <input
+                        ref={inputUserName}
+                        type="text"
+                        name="user-name"
+                        id="user-name"
+                        autoComplete="username"
+                        className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
                     <div className="col-span-6 sm:col-span-3">
                       <label
                         htmlFor="first-name"

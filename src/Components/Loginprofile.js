@@ -13,7 +13,6 @@ const navigation = [
   { name: "Dashboard", href: "#", current: true },
   { name: "Your Library", href: "#", current: false },
   { name: "Create Playlist", href: "#", current: false },
-  
 ];
 
 function classNames(...classes) {
@@ -265,7 +264,7 @@ export default function Loginprofile() {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900 ">
               Profile
             </h1>
           </div>
@@ -275,7 +274,7 @@ export default function Loginprofile() {
             <div className="md:grid md:grid-cols-3 md:gap-6">
               <div className="md:col-span-1">
                 <div className="px-4 sm:px-0">
-                  <h3 className="text-base font-semibold leading-6 text-gray-900">
+                  <h3 className="text-base font-semibold leading-6 text-gray-900 pt-4">
                     Profile
                   </h3>
                   <p className="mt-1 text-sm text-gray-600">
@@ -396,9 +395,7 @@ export default function Loginprofile() {
                   <h3 className="text-base font-semibold leading-6 text-gray-900">
                     Personal Information
                   </h3>
-                  <p className="mt-1 text-sm text-gray-600">
-                    Use a permanent address where you can receive mail.
-                  </p>
+                  
                 </div>
               </div>
               <div className="mt-5 md:col-span-2 md:mt-0">
@@ -406,6 +403,21 @@ export default function Loginprofile() {
                   <div className="overflow-hidden shadow sm:rounded-md">
                     <div className="bg-white px-4 py-5 sm:p-6">
                       <div className="grid grid-cols-6 gap-6">
+                        <div className="col-span-6 sm:col-span-4">
+                          <label
+                            htmlFor="user-name"
+                            className="block text-sm font-medium leading-6 text-gray-900"
+                          >
+                            User Name
+                          </label>
+                          <input
+                            type="text"
+                            name="user-name"
+                            id="user-name"
+                            autoComplete="username"
+                            className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          />
+                        </div>
                         <div className="col-span-6 sm:col-span-3">
                           <label
                             htmlFor="first-name"
@@ -453,86 +465,20 @@ export default function Loginprofile() {
                             className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
                         </div>
-
-                        <div className="col-span-6 sm:col-span-3">
-                          <label
-                            htmlFor="country"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            Country
-                          </label>
-                          <select
-                            id="country"
-                            name="country"
-                            autoComplete="country-name"
-                            className="mt-2 block w-full rounded-md border-0 bg-white py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          >
-                            <option>India</option>
-                            <option>Canada</option>
-                            <option>Mexico</option>
-                          </select>
-                        </div>
+                        
 
                         <div className="col-span-6">
                           <label
-                            htmlFor="street-address"
-                            className="block text-sm font-medium leading-6 text-gray-900"
+                            htmlFor="email-address"
+                            className="block text-sm font-medium leading-6 text-gray-900 pt-3 "
                           >
-                            Street address
+                            Phone Number
                           </label>
                           <input
                             type="text"
-                            name="street-address"
-                            id="street-address"
-                            autoComplete="street-address"
-                            className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          />
-                        </div>
-
-                        <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-                          <label
-                            htmlFor="city"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            City
-                          </label>
-                          <input
-                            type="text"
-                            name="city"
-                            id="city"
-                            autoComplete="address-level2"
-                            className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          />
-                        </div>
-
-                        <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                          <label
-                            htmlFor="region"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            State / Province
-                          </label>
-                          <input
-                            type="text"
-                            name="region"
-                            id="region"
-                            autoComplete="address-level1"
-                            className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                          />
-                        </div>
-
-                        <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                          <label
-                            htmlFor="postal-code"
-                            className="block text-sm font-medium leading-6 text-gray-900"
-                          >
-                            ZIP / Postal code
-                          </label>
-                          <input
-                            type="text"
-                            name="postal-code"
-                            id="postal-code"
-                            autoComplete="postal-code"
+                            name="phone-number"
+                            id="phone-number"
+                            autoComplete="number"
                             className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                           />
                         </div>
