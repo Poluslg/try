@@ -12,6 +12,7 @@ import Newac from './Components/Newac';
 import Policy from './Components/Policy';
 import Forgotpassword from './Components/Forgotpassword';
 import Errorpage from './Components/Errorpage';
+import Profilesetting from './Components/Profilesetting';
 
 
 
@@ -52,7 +53,12 @@ const router = createBrowserRouter([
   {
     path:'/forgotpassword',
     element:<Forgotpassword/>
+  },
+  {
+    path:'/profilesetting',
+    element:<Profilesetting/>
   }
+  
 
   
 ]);

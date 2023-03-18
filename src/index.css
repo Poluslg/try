@@ -361,3 +361,33 @@ margin-left: 2.25rem;
 
 /* .....................................END css of login.....................................................  */
 
+.devsite-breadcrumb-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  padding-left: 20px;
+  padding-top: 10px;
+}
+
+
+.devsite-breadcrumb-list li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.devsite-breadcrumb-list li:not(:first-child)::before {
+  content: " > ";
+}
+
+.devsite-breadcrumb-list li:last-child {
+  margin-right: 0;
+}
+
+.devsite-breadcrumb-list a {
+  text-decoration: none;
+  color: #5e0592;
+}
+
+.devsite-breadcrumb-list a:hover {
+  text-decoration: underline;
+}

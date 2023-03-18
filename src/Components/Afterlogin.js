@@ -139,7 +139,7 @@ export default function Afterlogin() {
                             </Menu.Item>
                             <Menu.Item>
                               <Link
-                                to="/errorpage"
+                                to="/profilesetting"
                                 className="block px-4 py-2 text-sm text-gray-700"
                               >
                                 Settings
@@ -231,7 +231,7 @@ export default function Afterlogin() {
                           </Menu.Item>
                           <Menu.Item>
                             <Link
-                              to="/errorpage"
+                              to="/profilesetting"
                               className="block px-4 py-2 text-sm text-gray-700"
                             >
                               Settings
