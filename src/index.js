@@ -13,6 +13,7 @@ import Policy from './Components/Policy';
 import Forgotpassword from './Components/Forgotpassword';
 import Errorpage from './Components/Errorpage';
 import Profilesetting from './Components/Profilesetting';
+import Loginprofile from './Components/Loginprofile';
 
 
 
@@ -57,8 +58,11 @@ const router = createBrowserRouter([
   {
     path:'/profilesetting',
     element:<Profilesetting/>
+  },
+  {
+    path:'/loginprofile',
+    element:<Loginprofile/>
   }
-  
 
   
 ]);
