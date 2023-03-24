@@ -2,11 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Home from './Components/Home';
-import reportWebVitals from './reportWebVitals';
 import Login from './Components/Login';
 import About from './Components/About';
 import { createBrowserRouter, RouterProvider,} from "react-router-dom";
-import Afterlogin from './Components/Afterlogin';
+import Dashboard from './Components/Dashboard';
 import Contact from './Components/Contact';
 import Newac from './Components/Newac';
 import Policy from './Components/Policy';
@@ -14,6 +13,8 @@ import Forgotpassword from './Components/Forgotpassword';
 import Errorpage from './Components/Errorpage';
 import Profilesetting from './Components/Profilesetting';
 import Loginprofile from './Components/Loginprofile';
+import Createplaylist from './Components/Createplaylist';
+import Yourlibrary from './Components/Yourlibrary';
 
 
 
@@ -40,8 +41,8 @@ const router = createBrowserRouter([
     element:<Contact/>
   },
   {
-    path:"/afterlogin",
-    element:<Afterlogin/>
+    path:"/dashboard",
+    element:<Dashboard/>
   },
   {
     path:"/policy",
@@ -62,7 +63,16 @@ const router = createBrowserRouter([
   {
     path:'/loginprofile',
     element:<Loginprofile/>
-  }
+  },
+  {
+    path:'/createplaylist',
+    element:<Createplaylist/>
+  },
+  {
+    path:'/yourlibrary',
+    element:<Yourlibrary/>
+  },
+
 
   
 ]);
@@ -72,4 +82,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   </React.StrictMode>
 );
 
-reportWebVitals();

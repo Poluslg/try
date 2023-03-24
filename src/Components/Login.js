@@ -17,8 +17,7 @@ export default function Login() {
         const user = userCredential.user;
         localStorage.setItem("token", user.accessToken);
         localStorage.setItem("uid", user.uid);
-        alert("wellcome to PMusic");
-        navigate("/afterlogin");
+        navigate("/dashboard");
       })
       .catch((error) => {
         if (error.code === "auth/user-not-found") {
@@ -37,9 +36,10 @@ export default function Login() {
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
-      navigate("/afterlogin");
+      navigate("/dashboard");
     }
   }, [navigate]);
+  
 
   const cancel = () => {
     navigate("/");
@@ -62,7 +62,7 @@ export default function Login() {
         localStorage.setItem("token", user.accessToken);
         localStorage.setItem("uid", user.uid);
         alert("welcome to PMusic");
-        navigate("/afterlogin");
+        navigate("/dashboard");
       })
       .catch((error) => {
         alert(error);
